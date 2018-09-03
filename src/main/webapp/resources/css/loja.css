@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300|Roboto:300,400,400i,700,700i');
+@font-face {
+    font-family: 'kg_second_chances_solid';
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, html { display:block; width:100%; height:100%; margin:0; padding:0; }
+#header { display:block; width:100%; height:200px; position:fixed; top:0; left:0; box-shadow: 0 0 3px #333; z-index:99999; }
+#header #topo { display:block; width:100%; height:150px; background:#fdfcf9; }
+#header #topo logo { width:30%; height:auto; position:absolute; left:8%; top:10px; }
+#header #topo logo img { width:auto; height:auto; max-width:100%; max-height:100%; }
+#header #topo conteudo { }
+#header #topo #menu1 { display:block; float:right; margin-right:1px; }
+/*#header #topo #menu1 div { background:#EEE; }*/
+/*#header #topo #menu1 div img { border:0; }*/
+#header #topo #menu1 .imgBtnTopo { display:inline-block; background:#EEE; width:auto; height:auto; }
+#header #topo #menu1 .imgBtnTopo:hover { background:#CCCCCC; cursor: pointer }
+#header #topo #menu1 .imgBtnTopo .labelButton { font-weight: bolder !important; font-size: 16px !important; color: #743446 !important; font-family: 'kg_second_chances_solid' !important; text-align: center !important; position:absolute !important; margin: 105px 1px 0px 1px !important; cursor: pointer !important; width: 94px !important;  }
+#header #topo #menu1 div a { font-size: 10px !important;  color: #743446}
+#header #menu { display:block; width: 100%; height:50px; background:#743446; font-family: "Roboto Condensed", sans-serif; text-align:center; }
+#header #menu a { display:inline-block; width:auto; height:auto; border:0; text-decoration:none; }
+#header #menu item { color:#FFF; font-size:18px; font-weight:300; text-transform:uppercase; padding: 14px 20px; margin:0; display:inline-block; cursor:pointer; }
+#header #menu item:hover { color:#eee8d2; }
+#header #busca {}
+#header #busca #btn_busca { background:#743446 url(#{resource['images/loja/icone_busca.png']}); display:inline-block; width:59px; height:54px; }
+#header #busca .campo_busca { background:#c9c9c9;  display:inline-block; width:455px; height:54px; }
+
+
+#destaques_home { display:block; width:100%;  max-height: 409px; min-height: auto; margin: 200px 0 0; padding:0; border-bottom:5px solid #3e6d6d; background:#333;overflow:hidden; }
+#destaques_home img {max-height: 409px; min-height: auto;}
+/*#destaques_home ul { list-style:none; margin:0 }
+#destaques_home h1 { font-family: 'kg_second_chances_solid'; font-size:38px; color:#FFF; font-weight:normal; position:absolute; margin:180px 0 0 220px; text-shadow:1px 1px 20px #333; }
+#destaques_home .bx-controls-direction { !* padding-top:400px !important; *! }
+#destaques_home .bx-controls-auto { display:none; }
+#destaques_home .bx-pager .bx-default-pager { display: none; }*/
+
+#content.site-content { display:block; width:100%; height:auto; }
+
+home #como_funcionamos { display:block; width:100%; height: auto; margin: 0 0; padding:0; border-bottom:35px solid #743446; background:#ede7cf url(#{resource['images/loja/bg1.jpg']}); }
+home #como_funcionamos h2 { display:block; font-size:0px; padding: 20px 0 0 225px; margin:0; }
+home #como_funcionamos #blocos { display:block; width:100%; height:auto; margin:50px 0 150px 0; text-align:center; }
+home #como_funcionamos #blocos img { display:inline-block; width:13%; height:auto; }
+
+
+body.page-template-loja { background:url(#{resource['images/loja/bg1.jpg']}); }
+
+#ofertas { display:block; width:100%; height:auto; min-height:300px; margin: 0 0; padding:0; background:#FFF; text-align:center; }
+produtos { display:block; width:100%; height:auto; margin-top:-10px; }
+produtos #ofertas { width:80%; background:none; float:left; background-color:#CCCCCC !important; }
+
+#ofertas div.bx-viewport { height:300px !important; }
+#ofertas h2 { display:block; font-size:0px; padding: 80px 25% 50px 0; margin:0; width:75%; text-align:center; }
+#ofertas h2 img { display:inline-block; width:30%; min-width:200px; max-width:300px; height:auto; }
+#ofertas ul li { list-style:none;  }
+produtos #ofertas ul li { width:25%; min-width:300px; height:auto; display:inline-block; padding:20px; background:#FFF; margin:10px; }
+produtos #ofertas ul li.produto_detalhe { width:75% !important; }
+#ofertas .bx-wrapper img { margin: 0 auto; }
+#ofertas .bx-wrapper { display:inline-block; }
+#ofertas .bx-wrapper .bx-prev { margin-left:-50px; }
+#ofertas .bx-wrapper .bx-next { margin-right:-50px; }
+#ofertas .container_img { display:inline-block; width:100%; height:200px; margin-bottom:10px; overflow:hidden; }
+#ofertas .description, #ofertas .btn_compre { display:inline-block; width:50%; float:left; }
+produtos #ofertas .description { width:100%; margin-bottom:10px; }
+#ofertas .description { color:#211915; font-family: 'Roboto Condensed', sans-serif; font-size:16px; text-align:left; }
+#ofertas .description.titulo { font-size:20px; font-weight:bold; }
+#ofertas .btn_compre, #loja pagamento .btn_compre { color:#FFF; background:#743446; border-radius:7px; font-family: 'kg_second_chances_solid'; font-size:20px; line-height:44px; height:auto; cursor:pointer; }
+#ofertas .btn_compre:hover, #loja pagamento .btn_compre:hover { background:#844456; }
+produtos #ofertas .btn_compre { float:right; }
+#ofertas .linha_preco { display:inline-block; width:100%; float:left; margin-top:-30px; }
+produtos  #ofertas .linha_preco { margin-top:0; }
+#ofertas .preco { font-size:11px; color:#3e6d6d; font-family: 'kg_second_chances_solid'; padding:10px 5px 10px 10px;  background:#FFF; display:inline-block; float:right; width:auto; }
+produtos #ofertas .preco { float:left; }
+#ofertas .preco .valor { font-size:20px; }
+
+#loja { display:inline-block; width:100%; height:auto; }
+
+#loja pagamento { display:inline-block; width:80%; margin-left: 05%; padding:5%; }
+
+#loja pagamento input { display:block; width:300px; padding:10px 20px; margin:10px; font-size:18px; border:1px solid #CCCCCC; border-radius:10px; background:#EFEFEF; font-family: 'Roboto Condensed', sans-serif; }
+
+barra_lateral { display:block; width:260px; height:auto; float:left; }
+#topo_menu_loja { display:block; width:260px; text-align:center; float:left; margin:20px 0; }
+menu_loja { display:block; width:260px; height:auto; float:left; margin: 20px 10px; border: solid #bfbaa9 1px; border-top: none; border-left: none; border-bottom: none; font-family: 'Roboto', sans-serif; font-size:16px; text-align:left; }
+.menu_topo { background: #743446; color:#FFF; text-transform:uppercase; border-right:1px; padding: 12px 30px; }
+menu_loja a { text-decoration:none; }
+.menu_item, .menu_sub_item { display:block; background:url(#{resource['images/loja/item_menu.png']}) no-repeat 12px 15px; padding: 12px 30px; color:#333; border: solid #bfbaa9 1px; border-top: none; border-left: none; border-right: none; }
+.menu_sub_item { padding-left:48px; background-position: 32px 15px }
+.menu_sub_item:hover { background-color:rgba(255,255,255,.7); }
+.menu_sub_item.on { background-color:#FFF; border-right: 4px solid #743446; }
+
+.site-content-contain { margin-top:200px; }
+.single-featured-image-header img { width:100%; height:auto; border-bottom: 6px solid #3e6d6d; margin:0; padding:0; }
+.entry-header { border-bottom:6px solid #743446; padding:50px 0 28px 0; }
+h1.entry-title { font-family: 'kg_second_chances_solid'; font-size:30px; color:#743446; margin: 0; height:31px; }
+.h1-content-icone { padding-left:15px;}
+#main { width:84%; margin:0 8%; font-size:26px; line-height:32px; font-family: 'Roboto Condensed', sans-serif;  color:#393939; }
+.entry-content { margin: 65px 70px; }
+
+#rodape1 { display:inline-block; width:100%; height:545px; margin: 0 0; padding: 50px 0 0 0; color:#FFF; font-family: 'Roboto', sans-serif; font-size:32px; font-weight:300; text-align:center; }
+#rodape1 h2 { display:none; }
+#rodape1 .horario_feira { font-size:20px; }
+
+#rodape1 #entrega { display:block; width:100%; height:195px; margin: -190px 0 0 0; padding: 0 0 0 0; background:#406e6d; }
+#rodape1 #entrega #entregas { margin: 28px 420px 0 0; }
+#rodape1 #entrega #bike15 { margin: 20px 0 0 420px; }
+#rodape1 #horario { display:block; width:100%; height:62px; margin: 0 0; padding: 6px 0 0 0; background:#743446; line-height:28px;  }
+#rodape1 #horario .endereco1 { font-size:20px; line-height:20px; font-family: 'Roboto Condensed', sans-serif; }
+
+#rodape { display:inline-block; width:100%; height:auto; color:#393939; text-align:center; background:#FFF; }
+#rodape_conteudo { display:inline-block; width:1010px; margin:35px 0 20px 0; font-size:16px; line-height:18px; font-family: 'Roboto Condensed', sans-serif; text-align:left; }
+#rodape_conteudo #coluna1 { display:block; width:260px; height:160px; padding: 0 25px 0 0; border-right: 1px solid #e1e0df; float:left; }
+#rodape_conteudo #coluna1 ul { padding: 0 0 0 20px; font-weight:bold; }
+#rodape_conteudo #coluna2 { display:block; width:125px; height:160px; padding: 0 25px 0 75px; border-right: 1px solid #e1e0df; float:left; }
+#rodape_conteudo #coluna3 { display:block; width:340px; height:160px; padding: 0 100px 0 50px; float:left; }
+#rodape_conteudo b { text-transform:uppercase; font-weight:bold; font-size:18px }
+#rodape_conteudo a { text-decoration:none; color:#393939; }
+#rodape_conteudo a:hover { text-decoration:underline; }
+
+#newsletter_rodape input { font-family: 'kg_second_chances_solid'; size:22px; width:auto; height:auto; padding: 2px 6px; margin:-20px 6px 0 0; border: 4px solid #bebebe; color:#743446; }
+#newsletter_rodape input.submit { background:#743446; color:#FFF; border-color:#743446; cursor:pointer; }
+#newsletter_rodape input.submit:hover { background:#406e6d; border-color:#406e6d; }
+
+.labelLogin { font-weight: bold !important;}
+.labelDefault {font-size: 10px; font-weight: bold; color: #743446}
+.textDefault, .textDefaultWithIconSmall {font-size: 10px;}
+.textDefaultWithIconSmall {padding: 2px 1px 1px 20px; text-align: center ; }
+
+.btnLogin {  color:#FFF !important; background:#743446 !important;font-size:16px !important; line-height:44px !important; height:auto !important; cursor:pointer  !important; }
+.btnLogin:hover { background:#844456 !important;}
+
+.linkSubMenuUsuario { font-weight: bolder; font-size:16px; color: #743446; padding-right: 4px;}
+.separatorSubMenuUsuario { margin-top: 10px; margin-bottom: 10px; }
+.separatorVertical { width:2px; height:25px; padding: 1px 1px 1px 1px; display: inline;}
+
+.defaultBackground { background:#EEE; }
+

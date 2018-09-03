@@ -1,0 +1,31 @@
+/* Configurações do tamanho dos componentes primefaces */
+.ui-widget {
+	font-family: Verdana, Arial, sans-serif !important;
+	/*font-family: Courier, Verdana, Arial, sans-serif !important;*/
+	font-size: 0.9em !important;
+}
+
+/*Header das Grids*/
+div.ui-datatable-header {
+	height: 25px ;
+}
+
+/*Header das linhas da Grids*/
+.customGrid thead tr span {
+	font-size: 11px !important;
+	padding: 1px 11px 1px 11px !important;
+	margin: 0px 0px 0px 0px !important;
+	font-weight: bold !important;
+}
+
+/* Linhas das grids*/
+.customGrid tbody tr td {
+	font-size: 11px !important;
+	padding: 1px 2px 1px 2px !important;
+	margin: 0px 0px 0px 0px !important;
+}
+
+/*Footer das Grids*/
+div.ui-datatable-footer {
+	height: 25px ;
+}

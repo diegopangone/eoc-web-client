@@ -1,0 +1,126 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition template="/pages/defaultLayout.xhtml"
+				xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:h="http://java.sun.com/jsf/html"
+				xmlns:ui="http://java.sun.com/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://java.sun.com/jsf/core">
+
+
+	<ui:define name="siteContent">
+
+		<p:spinner />
+		<p:calendar />
+
+		<p:commandButton type="button" onclick="PF('switcher').previous();"
+						 icon="ui-icon-circle-triangle-w" id="prev"/>
+		<p:commandButton type="button" onclick="PF('switcher').next();"
+						 icon="ui-icon-circle-triangle-e" id="next"/>
+
+		<p:imageSwitch effect="wipe" widgetVar="switcher" id="manuelSwitcher" slideshowAuto="false" >
+			<p:graphicImage value="#{resource['images/loja/slider1.jpg']}" />
+			<p:graphicImage value="#{resource['images/loja/slider2.jpg']}" />
+		</p:imageSwitch>
+
+		<p:inputTextarea rows="6" cols="33" />
+
+		<p:scrollPanel mode="native" style="width:50%;height:200px">
+			<p>
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit tortor a ipsum vehicula, in semper sapien auctor. Nulla tempor eget est non consequat. Nulla sit amet lorem justo. Cras non tellus eros. Sed ultricies orci ut quam interdum fringilla. Nam vitae massa ac mi elementum mattis vel vitae sem. Ut eros ipsum, scelerisque a erat a, eleifend luctus nibh. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+			</p>
+			<p>
+				Vivamus ac ullamcorper magna. Aenean felis ante, elementum sit amet urna at, eleifend aliquet velit. Morbi a convallis magna. In nec leo vel dolor hendrerit pharetra. Cras in iaculis enim. Aenean porta sapien dignissim turpis dapibus, eu dictum velit elementum. Aliquam sollicitudin gravida luctus.
+			</p>
+			<p>
+				Ut vel nulla sit amet erat laoreet eleifend nec sed lacus. Quisque placerat diam vitae justo eleifend, rutrum mollis mauris fringilla. Curabitur turpis odio, euismod id lorem a, ultricies suscipit ligula. Pellentesque ut erat a leo rhoncus porta ac sed velit. Nunc at erat ligula. Fusce vehicula posuere interdum. Curabitur tempus, tortor at sollicitudin dapibus, erat ante varius nisl, id dictum erat ipsum porttitor ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nulla id varius enim, sed rutrum orci.
+			</p>
+			<p>
+				Sed tincidunt urna quis metus lacinia commodo. Praesent convallis eros vel quam scelerisque bibendum. Mauris eget dignissim libero. Pellentesque sagittis sem quis ipsum viverra, sed consequat mi consectetur. Donec facilisis dapibus ultrices. Donec luctus auctor lacus, at congue nisi aliquet eu. Praesent in justo at risus faucibus ultricies. Fusce et libero lectus. Donec elementum pharetra sapien, at placerat purus sodales et. Vivamus iaculis lacus sed placerat rhoncus. Mauris iaculis sit amet nunc at placerat. Donec consequat euismod lacinia. Etiam nec quam vehicula, cursus massa in, ullamcorper erat.
+			</p>
+			<p>
+				Praesent volutpat scelerisque vestibulum. In eu massa non neque rutrum commodo. Nunc vel enim nisi. Aenean leo ipsum, molestie vel justo nec, pharetra luctus dui. Nunc rhoncus turpis id lorem luctus consequat. Nulla condimentum adipiscing turpis consequat semper. Etiam ullamcorper velit nec hendrerit malesuada. Praesent venenatis leo sit amet arcu commodo, sit amet porta tellus suscipit. Quisque mi tortor, vestibulum in arcu non, pretium auctor libero. In commodo luctus placerat.
+			</p>
+		</p:scrollPanel>
+
+
+
+
+
+		<h:form id="form">
+			<!--<p:repeat value="#{lojaBean.listProductSuppliers}" var="product">
+				<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+					<p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()">
+						<f:setPropertyActionListener value="#{product}" target="#{lojaBean.selectedProduct}" />
+						<p:graphicImage value="../../../SSAdminSharedImages/#{product.imageName}"  />
+					</p:commandLink>
+
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Id:" />
+							<h:outputText value="#{product.idProduct}" style="font-weight: bold"/>
+
+							<h:outputText value="Descrição:" />
+							<h:outputText value="#{product.description}" style="font-weight: bold"/>
+
+							<h:outputText value="Data:" />
+							<h:outputText value="#{product.dtRegister}" style="font-weight: bold"/>
+						</h:panelGrid>
+					</p:outputPanel>
+				</h:panelGrid>
+				<hr />
+			</p:repeat>
+
+			<p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+				<p:outputPanel id="carDetail" style="text-align:center;">
+					<p:panelGrid  columns="2" rendered="#{not empty lojaBean.selectedProduct}" columnClasses="label,value">
+						<f:facet name="header">
+							<p:graphicImage value="../../../SSAdminSharedImages/#{product.imageName}"  />
+						</f:facet>
+
+						<h:outputText value="Id:" />
+						<h:outputText value="#{lojaBean.selectedProduct.idProduct}" />
+
+						<h:outputText value="Year" />
+						<h:outputText value="#{lojaBean.selectedProduct.description}" />
+
+						<h:outputText value="Color:" />
+						<h:outputText value="#{lojaBean.selectedProduct.dtRegister}" />
+
+						<h:outputText value="Price" />
+						<h:outputText value="$#{lojaBean.selectedProduct.imageName}" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>-->
+
+
+
+			<p:dataScroller value="#{lojaBean.listProductSuppliers}" var="product" chunkSize="10">
+				<f:facet name="header">
+					Scroll Down to Load More Cars
+				</f:facet>
+
+				<h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+					<p:graphicImage value="../../../SSAdminSharedImages/#{product.imageName}"  />
+
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Id:" />
+							<h:outputText value="#{product.idProduct}" style="font-weight: bold"/>
+
+							<h:outputText value="Year:" />
+							<h:outputText value="#{product.description}" style="font-weight: bold"/>
+
+							<h:outputText value="Color:" />
+							<h:outputText value="#{product.dtRegister}" style="font-weight: bold"/>
+						</h:panelGrid>
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:dataScroller>
+
+
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

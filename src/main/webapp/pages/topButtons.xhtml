@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+    <div class="imgBtnTopo" onclick="window.location='loja'">
+        <p:outputLabel styleClass="labelButton" value="Loja"  />
+        <img src="#{resource['images/loja/btn_loja.png']}" alt="Loja" />
+    </div>
+
+    <div class="imgBtnTopo">
+        <span style="font-weight: bolder !important; font-size: 13px !important; color: #743446 !important; font-family: 'kg_second_chances_solid'; text-align: right; position:absolute; margin: 40px 1px 0px 1px; cursor: pointer; width: 35px; ">
+            <h:outputLabel id="labelProductsAmount" value="(#{sessionBean.productsAmount})"  />
+        </span>
+        <span class="labelButton" style="font-size: 14px !important; padding-top: 2px;">
+                R$
+                <h:outputLabel id="labelTotalSaleCost" value="#{sessionBean.saleCost}" converter="currencyConverter"  />
+            </span>
+        <p:graphicImage id="btnCarrinho"  value="#{resource['images/loja/btn_carrinho.png']}" alt="Carrinho"/>
+    </div>
+
+    <sec:authorize access="isAuthenticated()">
+        <div class="imgBtnTopo">
+            <span class="labelButton" style="margin-top: 95px !important;" onclick="PF('overlayEntrega').show();">
+                Entrega<br/>
+                <h:outputLabel id="dataEntregaBotaoLabel" value="#{sessionBean.selectedRoute.dateDelivery}" converter="dateConverter" style="font-size: 14px !important; cursor: pointer" />
+            </span>
+            <p:graphicImage id="btnEntrega"  value="#{resource['images/loja/btn_entrega.png']}" alt="Entrega"/>
+        </div>
+    </sec:authorize>
+
+    <sec:authorize access="isAuthenticated()">
+        <div class="imgBtnTopo" >
+            <p:outputLabel styleClass="labelButton" value="Usuário" onclick="PF('overlayUsuario').show();"/>
+            <p:graphicImage id="btnUsuario"  value="#{resource['images/loja/btn_usuario2.png']}" alt="Usuário"/>
+        </div>
+    </sec:authorize>
+
+    <sec:authorize access="not isAuthenticated()">
+        <div class="imgBtnTopo">
+            <p:outputLabel styleClass="labelButton" value="Acesso" onclick="PF('overlayLogin').show();" />
+            <p:graphicImage id="btnLogin"  value="#{resource['images/loja/btn_login2.png']}" alt="Acesso"/>
+        </div>
+    </sec:authorize>
+
+
+    <!-- Overlay De Login -->
+    <sec:authorize access="not isAuthenticated()">
+
+        <p:overlayPanel widgetVar="overlayLogin"  for="btnLogin" showEvent="click" hideEvent="click" style="width:230px" styleClass="defaultBackground" >
+
+            <p:outputLabel style="color: red;" rendered="#{param.accessError == true}" value="Email/Senha Inválido(s)" />
+
+            <form name='formLogin' action='${facesContext.externalContext.requestContextPath}/login' method='POST'>
+
+                <p:outputLabel value="Email:" styleClass="labelLogin"/>
+
+                <p:inputText type="text" id="username" required="true" />
+
+                <p:outputLabel value="Senha:" styleClass="labelLogin"/>
+
+                <!--<p:inputText type="password" id="password" required="true"/>-->
+                <p:password id="password" required="true" />
+
+                <div style="padding-top: 5px; width: 100%;" >
+                    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btnLogin" type="submit">
+                        <span class="ui-button-text ui-c">Login</span>
+                    </button>
+                </div>
+
+                <div style="width: 100%; padding-top: 5px;">
+                    <div align="left" style="float: left">
+                        <p:link value="Registrar-se"  />
+                    </div>
+
+                    <div align="right" style="float: right">
+                        <p:link value="Esqueci a Senha"  />
+                    </div>
+                </div>
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+            </form>
+
+        </p:overlayPanel>
+
+        <!-- Exibe o PopUp da login caso tenha ocorrido uma falha na autenticação -->
+        <h:outputScript rendered="#{param.accessError == true}">
+            $(document).ready(function () {
+                PF('overlayLogin').show();
+            });
+        </h:outputScript>
+
+    </sec:authorize>
+
+    <!-- Overlay  Sub Menu Usuário-->
+    <sec:authorize access="isAuthenticated()">
+        <p:overlayPanel widgetVar="overlayUsuario" for="btnUsuario" showEvent="click" hideEvent="click" style="min-width:250px; padding-bottom: 2px !important;" styleClass="defaultBackground">
+
+            <div class="divTable">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <h:outputLabel value="Olá, #{sessionBean.loggedCustomer.firstName}" style="font-weight: bold; font-size: 12px;"/>
+                        </div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <div class="divTable">
+                                <div class="divTableBody">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">
+                                            <span class="labelDefault">Data de Entrega</span>
+                                        </div>
+                                        <div class="divTableCell" style="text-align: right; display: #{sessionBean.loggedCustomer.debitCredit ne null and sessionBean.loggedCustomer.debitCredit ne 0 ? '': 'none'}">
+                                            <span class="labelDefault">
+                                                <c:choose>
+                                                    <c:when test="#{sessionBean.loggedCustomer.debitCredit lt 0}">
+                                                        <span class="labelDefault">Débito</span>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <span class="labelDefault">Crédito</span>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">
+                                            <h:outputLabel id="dataEntregaLabel" style="background:url(#{resource['images/loja/icone_delivery_pequeno.png']}) no-repeat; " class="textDefaultWithIconSmall" value="#{sessionBean.selectedRoute.dateDelivery}" converter="dateConverter"  />
+                                        </div>
+                                        <div class="divTableCell textDefault" style="text-align: right; display: #{sessionBean.loggedCustomer.debitCredit ne null and sessionBean.loggedCustomer.debitCredit ne 0 ? '': 'none'}">
+                                            <span style="color: #{sessionBean.loggedCustomer.debitCredit lt 0 ? '#bd2130' : ''}">
+                                                <span style="padding-right: 2px;">R$</span>
+                                                <h:outputText value="#{sessionBean.loggedCustomer.debitCredit}" converter="currencyConverter"/>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <span class="labelDefault">Último Acesso</span>
+                        </div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <h:outputLabel  style="background:url(#{resource['images/loja/icone_ultimo_acesso2.png']}) no-repeat; " class="textDefaultWithIconSmall" value="#{sessionBean.loggedCustomer.dtLastAccess}" converter="dateTimeConverter"  />
+                        </div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <p:separator styleClass="separatorSubMenuUsuario"/>
+                        </div>
+                    </div>
+                    <div class="divTableRow">
+                        <div class="divTableCell">
+                            <div style="display: inline; ">
+
+                                <!-- Dados Usuário -->
+                                <img src="#{resource['images/loja/cadastro_usuario.png']}" alt="Meus Dados" />
+                                <p:link value="Meus Dados" styleClass="linkSubMenuUsuario" />
+                                <p:separator styleClass="separatorVertical" />
+
+                                <!-- Histórico de Compras -->
+                                <img src="#{resource['images/loja/historico_compras.png']}" alt="Histórico de Compras"/>
+                                <p:link value="Histórico" styleClass="linkSubMenuUsuario" />
+                                <p:separator styleClass="separatorVertical"/>
+
+                                <!-- Sair -->
+                                <form id="formSignOff" style="display: inline;" action="${facesContext.externalContext.requestContextPath}/logout" method="POST" >
+                                    <img src="#{resource['images/loja/sair.png']}" alt="Sair"/>
+                                    <a href="#" class="linkSubMenuUsuario" onclick="document.forms['formSignOff'].submit();">Sair</a>
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </p:overlayPanel>
+
+    </sec:authorize>
+
+    <!-- Overlay Para Selecionar a Entrega-->
+    <sec:authorize access="isAuthenticated()">
+        <p:overlayPanel widgetVar="overlayEntrega" for="btnEntrega" showEvent="click" hideEvent="click" style="width:280px; " styleClass="defaultBackground">
+
+            <h:form id="formListRoutes">
+
+                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+
+                <p:dataTable var="route"
+                             id="gridRouteChooser"
+                             value="#{sessionBean.loggedCustomer.listRoutes}"
+                             selection="#{sessionBean.selectedRoute}"
+                             rowIndexVar="index"
+                             tableStyleClass="customGrid"
+                             rowKey="#{route.idRoute}">
+
+                    <f:facet name="header">
+                        <h:outputLabel value="Datas Disponíveis Para Sua Região" styleClass="labelDefault" />
+                    </f:facet>
+
+                    <p:column selectionMode="single" headerText="#" style="width:33px; text-align:center"  />
+
+                    <p:ajax event="rowSelectRadio"  update=":dataEntregaBotaoLabel :dataEntregaLabel" process="@this" />
+
+                    <p:column headerText="Data" style="text-align: center;">
+                        <h:outputText value="#{route.dateDelivery}"  converter="dateConverter" rendered="#{index ne 0}" />
+                        <h:outputText value="#{route.dateDelivery}"  converter="dateConverter" style="padding: 2px 1px 1px 20px; background:url(#{resource['images/loja/icon_best_day_to_bay.png']}) no-repeat; " rendered="#{index eq 0}"/>
+                    </p:column>
+
+                    <p:column headerText="Valor" style="text-align: right;">
+                        <h:outputText value="R$" /><p:spacer/>
+                        <h:outputText value="#{route.rateDelivery}" >
+                            <f:converter converterId="currencyConverter" />
+                        </h:outputText>
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div style="width: 100%; text-align: center;">
+                            <h:outputLabel style="background:url(#{resource['images/loja/icon_best_day_to_bay.png']}) no-repeat; " class="labelDefault textDefaultWithIconSmall" value="Melhor data para seu pedido!" />
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+
+            </h:form>
+        </p:overlayPanel>
+    </sec:authorize>
+
+<!--    <h:form>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+       &lt;!&ndash; <pe:remoteCommand name="enviaValorCompraCookie" process="@this" update="@this" actionListener="#{sessionBean.setSaleValueOfCookie}">
+            <pe:methodSignature parameters="java.lang.Float" />
+            <pe:methodParam name="saleCost"/>
+        </pe:remoteCommand>&ndash;&gt;
+         <p:remoteCommand name="enviaValorCompraCookie" process="@this" update="@this" actionListener="#{sessionBean.setSaleValueOfCookie}"/>
+    </h:form>-->
+
+    <!--<h:outputScript>
+        $(document).ready(function () {
+            //PF('overlayEntrega').show();
+            //alert(getCookie("valor_total_compra"))
+            putCookie("cookie_valor_total_compra", "10.30", 5)
+
+            //alert(getCookie("valor_total_compra"))
+            //enviaValorCompraCookie(getCookie("valor_total_compra"))
+
+            enviaValorCompraCookie([{name:'saleCost', value:getCookie("cookie_valor_total_compra")}])
+
+            //enviaValorCompraCookie([{valor_total_compra: getCookie("valor_total_compra")}])
+        });
+
+    </h:outputScript>-->
+
+</html>

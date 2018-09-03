@@ -1,0 +1,112 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+
+	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd">
+
+    <context:component-scan base-package="br.com.eoc"/>
+    <context:annotation-config/>
+
+    <!-- Configurações do DataSource -->
+    <jee:jndi-lookup id="dataSource" jndi-name="java:/EOCDataSource" />
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- Cria o ViewScope para o spring, já que o mesmo não possui este tipo de escopo -->
+    <bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+        <property name="scopes">
+            <map>
+                <entry key="view">
+                    <bean class="br.com.eoc.web.client.scope.SpringCustomViewScope"/>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+    <!--  Configurações de Autenticação -->
+    <sec:http use-expressions="true"  auto-config="true">
+
+        <!-- Permite acesso aos arquivos css, e javascript para todos os usuário -->
+        <sec:intercept-url pattern="/javax.faces.resource/**" access="permitAll"/>
+
+        <!-- Só pode acessar a sessão de usuário, caso estiver logado -->
+        <sec:intercept-url pattern="/usuario**" access="isAuthenticated()" />
+
+        <!-- Para os demais links, não precisa estar autenticado para ter acesso -->
+        <sec:intercept-url pattern="/**" access="permitAll"/>
+
+        <!-- Redirecionamento do form de login -->
+        <sec:form-login login-page="/home" authentication-failure-url="/home?accessError=true" default-target-url="/home"/>
+
+        <sec:logout logout-success-url="/accessSucess"/>
+
+        <sec:access-denied-handler error-page="/accessDenied"/>
+
+        <sec:csrf/>
+
+    </sec:http>
+
+    <bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:password-encoder ref="encoder" />
+            <sec:jdbc-user-service data-source-ref="dataSource"
+                                   users-by-username-query="SELECT EMAIL AS USERNAME, PASSWORD AS PASSWORD, IS_ACTIVE AS ENABLE FROM TB_CUSTOMER WHERE IS_ACTIVE = TRUE AND EMAIL =?"
+                                   authorities-by-username-query="SELECT EMAIL AS USERNAME, 'AUTHORIZED' AS AUTHORITY FROM TB_CUSTOMER WHERE IS_ACTIVE = TRUE AND EMAIL =?" />
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+ <!--   <bean id="webInvocationPrivilegeEvaluator" class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+        <constructor-arg ref="filterSecurityInterceptor">
+    </bean>-->
+
+<!--    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:password-encoder ref="encoder" />
+            <sec:user-service>
+                <sec:user name="diego" password="$2a$10$n2dHmahJk.QT5sD.5NMic.4l88eUuroytmR2HJzb3dUB/uJcAgNam" authorities="ROLE_CUSTOMER" />
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>-->
+
+
+    <!-- Bean para substituir as variáveis de ambiente nos contexts, para o caminho configurado Ex: ${module.name} -->
+    <bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="searchSystemEnvironment" value="true" />
+        <property name="locations">
+            <list>
+                <value>classpath*:version.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--Carrega as configurações do módulo como nome, versão, titulo etc -->
+    <bean id="appInfoBean" class="br.com.eoc.web.client.bean.AppInfoBean">
+        <property name="version" value="${app.version}"/>
+        <property name="name" value="${app.name}"/>
+        <property name="buildDate" value="${app.buildDate}"/>
+        <property name="description" value="${app.description}"/>
+        <property name="ppackage" value="${app.package}"/>
+        <property name="deployedServer" value="${jboss.server.name}"/>
+        <property name="deployedNode" value="${jboss.node.name}"/>
+    </bean>
+
+
+</beans>

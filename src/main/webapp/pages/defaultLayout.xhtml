@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:sec="http://www.springframework.org/security/tags">
+
+<h:head>
+    <title>Loja Virtual &#8211; Caminhos da Roça - v #{appInfoBean.version}</title>
+    <ui:include src="/pages/defaultImport.xhtml" />
+
+</h:head>
+
+<h:body id="mainBody" class="page-template-default page page-id-5 page-two-column colors-light ui-fluid">
+
+    <div id="page" class="site">
+
+        <div id="header">
+
+            <div id="topo">
+
+                <a href="home" target="_parent">
+                    <logo>
+                        <img src="#{resource['images/loja/logo_caminhos_da_roca_topo.png']}" alt="Caminhos da Roça - desde 1999" title="Caminhos da Roça - desde 1999" />
+                    </logo>
+                </a>
+
+                <div id="menu1">
+                    <ui:include src="topButtons.xhtml" />
+                </div>
+
+            </div>
+
+            <div id="menu">
+                <a href="quem-somos" target="_parent">
+                    <item>Quem somos</item>
+                </a>
+                <!--<a href="/geladeira-na-medida" target="_parent">
+                    <item>Geladeira na Medida</item>
+                </a>-->
+                <a href="#como_funcionamos" target="_parent">
+                    <item>Como funcionamos</item>
+                </a>
+                <a href="#feirinha" target="_parent">
+                    <item>Feirinha</item>
+                </a>
+                <a href="produtores-e-fornecedores" target="_parent">
+                    <item>Produtores e Fornecedores</item>
+                </a>
+                <a href="/o-que-semeamos" target="_parent">
+                    <item>O que Semeamos</item>
+                </a>
+                <!--<a href="/blog" target="_parent">
+                    <item>Blog</item>
+                </a>-->
+            </div>
+
+        </div>
+
+
+
+        <div class="site-content-contain">
+
+            <div id="content" class="site-content">
+
+
+                <ui:insert name="siteContent">Page Body</ui:insert>
+
+                <div id="rodape1">
+                    <img src="#{resource['images/loja/feira.png']}" alt="Venha conhecer a nossa feira" id="feirinha" /><br/>
+                    <span class="horario_feira">Segunda das 13h às 19h | Terça a quinta das 10h às 18h</span>
+                    <div id="entrega">
+                        <img src="#{resource['images/loja/entregas.png']}" alt="Entregas São Paulo e Granja Viana" id="entregas"/>
+                        <img src="#{resource['images/loja/bike15.png']}" alt="Se vier de bicicleta ganha mais 15%" id="bike15"/></div>
+                    <div id="horario">Aqui na Caminhos da Roça<br/>
+                        <span class="endereco1">Av. Otacilio Tomanik, 926 - Butantã - São Paulo/SP</span>
+                    </div>
+                </div>
+
+
+            </div><!-- #content -->
+
+        </div><!-- .site-content-contain -->
+
+    </div><!-- #page -->
+
+    <div id="rodape">
+
+        <div id="rodape_conteudo">
+
+            <div id="coluna1">
+                <b>Quem somos</b>
+                <ul>
+                    <a href="/nossa-equipe" ><li>Nossa equipe</li></a>
+                    <a href="/nossa-historia"><li>Nossa História</li></a>
+                    <a href="/politica-de-privacidade"><li>Política de privacidade</li></a>
+                    <a href="/faq"><li>FAQ</li></a>
+                </ul>
+            </div>
+
+            <div id="coluna2">
+                <b>SIGA-NOS</b><br/><br/>
+                <img src="#{resource['images/loja/rodape_redes.png']}" />
+            </div>
+
+            <div id="coluna3">
+                <b>Contato</b>
+                <p>Telefone: <a href="tel:1137336727">(11) 3733-6727</a> / <a href="tel:1145086727">(11) 4508-6727</a><br/>
+                    Whatsapp: <a href="whatsapp:11941712692">(11) 941-712-692</a>
+                    <br/>
+                    e-mail: <a href="mailto:euquero@caminhosdaroca.com.br">euquero@caminhosdaroca.com.br</a>
+                    <br/><br/>
+                    <strong>Deseja receber novidades?</strong>
+                </p>
+                <div id="newsletter_rodape">
+                    <script type="text/javascript">
+                        (function() {
+                            if (!window.mc4wp) {
+                                window.mc4wp = {
+                                    listeners: [],
+                                    forms    : {
+                                        on: function (event, callback) {
+                                            window.mc4wp.listeners.push({
+                                                event   : event,
+                                                callback: callback
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        })();
+                    </script>
+                </div>
+            </div>
+        </div> <!-- rodape_conteudo -->
+    </div> <!-- rodape -->
+</h:body>
+</html>
