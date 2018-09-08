@@ -13,6 +13,7 @@ public class ProductSubGroupRowMapper implements RowMapper<ProductSubGroupVO> {
 
         ProductSubGroupVO vo = new ProductSubGroupVO();
         vo.setIdProductSubGroup(rs.getInt("ID_PRODUCT_SUB_GROUP"));
+        vo.setIdProductGroup(rs.getInt("ID_PRODUCT_GROUP"));
         vo.setDescription(rs.getString("DESCRIPTION"));
         vo.setActive(rs.getBoolean("IS_ACTIVE"));
         return vo;

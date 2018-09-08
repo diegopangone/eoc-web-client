@@ -8,6 +8,7 @@ public class ProductSubGroupVO extends AbstractVO {
     private static final long serialVersionUID = 1L;
 
     private Integer idProductSubGroup;
+    private Integer idProductGroup;
     private String description;
     private boolean isActive;
 
@@ -38,5 +39,13 @@ public class ProductSubGroupVO extends AbstractVO {
 
     public void setActive(boolean active) {
         isActive = active;
+    }
+
+    public Integer getIdProductGroup() {
+        return idProductGroup;
+    }
+
+    public void setIdProductGroup(Integer idProductGroup) {
+        this.idProductGroup = idProductGroup;
     }
 }

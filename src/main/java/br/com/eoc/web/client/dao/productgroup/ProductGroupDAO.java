@@ -32,7 +32,8 @@ public class ProductGroupDAO extends AbstractDAO {
     public List<ProductSubGroupVO> selectActiveSubGroupsByGroup(ProductGroupVO productGroupVO){
 
         String sql = "" +
-                "SELECT PSG.ID_PRODUCT_GROUP,                       " +
+                "SELECT PSG.ID_PRODUCT_SUB_GROUP,                   " +
+                "       PSG.ID_PRODUCT_GROUP,                       " +
                 "       PSG.DESCRIPTION,                            " +
                 "       PSG.IS_ACTIVE                               " +
                 "FROM TB_PRODUCT_SUB_GROUP PSG                      " +
